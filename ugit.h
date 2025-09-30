@@ -39,6 +39,8 @@ typedef struct { // Definicion de estructura
     char commit_id[65];
     char parent_id[65];
     char message[MAX_COMMIT_MSG_LEN];
+    char author_name[128];
+    char author_email[128];
     time_t timestamp;
     FileEntry files[MAX_FILES]; // Estructura que representa un archivo en staging area
     int file_count; // Prototipo de funcion
