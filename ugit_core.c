@@ -284,7 +284,7 @@ void ugit_log() { // Muestra el historial de commits
         strftime(date_str, sizeof(date_str), "%a %b %d %H:%M:%S %Y %z", localtime(&commit->timestamp));
 
         printf("Commit: %s\n", commit->commit_id);
-        printf("Autor: Tu nombre <tu.email@ejemplo.com>\n");
+        printf("Autor: %s <%s>\n", commit->author_name, commit->author_email);
         printf("Fecha: %s\n\n", date_str);
         printf("    %s\n\n", commit->message);
 
