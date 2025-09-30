@@ -193,6 +193,26 @@ void ugit_commit(const char* message) { // Crea un nuevo commit
         return;
     }
     
+    // Solicitar nombre y correo del autor
+    char author_name[128];
+    char author_email[128];
+    
+    printf("Ingrese su nombre: ");
+    fflush(stdout);
+    if (fgets(author_name, sizeof(author_name), stdin) != NULL) {
+        author_name[strcspn(author_name, "\n")] = 0; // Eliminar salto de línea
+    } else {
+        strcpy(author_name, "Usuario Desconocido");
+    }
+    
+    printf("Ingrese su correo: ");
+    fflush(stdout);
+    if (fgets(author_email, sizeof(author_email), stdin) != NULL) {
+        author_email[strcspn(author_email, "\n")] = 0; // Eliminar salto de línea
+    } else {
+        strcpy(author_email, "desconocido@ejemplo.com");
+    }
+    
     Commit new_commit;
     char* commit_id = calculate_hash(message); // Funcion que genera un hash simple a partir de datos
     if (!commit_id) {
@@ -215,6 +235,8 @@ void ugit_commit(const char* message) { // Crea un nuevo commit
     }
     
     strcpy(new_commit.message, message);
+    strcpy(new_commit.author_name, author_name);
+    strcpy(new_commit.author_email, author_email);
     new_commit.timestamp = time(NULL);
 
     save_commit(&new_commit); // Guarda la informacion de un commit en un archivo
@@ -227,8 +249,10 @@ void ugit_commit(const char* message) { // Crea un nuevo commit
     }
     
     staging_count = 0;
+    save_staging_area();
 
     printf("[ master (%s) %s ] %s\n", new_commit.parent_id, new_commit.commit_id, new_commit.message);
+    printf("Autor: %s <%s>\n", author_name, author_email);
     printf("%d archivo modificado, %d inserciones (+)\n", new_commit.file_count, new_commit.file_count * 10);
 }
 
