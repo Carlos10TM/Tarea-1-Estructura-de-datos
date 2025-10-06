@@ -1,10 +1,5 @@
-// ugit_core.c
 // Implementacion de las funciones principales y auxiliares del simulador uGit.
 // Incluye logica para commits, area de preparacion, historial y restauracion de archivos.
-
-// ugit_core.c
-// Implementacion de las funciones principales para el simulador μGit.
-// Incluye la logica para la gestion de commits, archivos, y el historial de versiones.
 
 #include "ugit.h"
 
